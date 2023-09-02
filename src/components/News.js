@@ -12,7 +12,7 @@ export default class News extends Component {
   }
   async componentDidMount() {
     let url =
-      "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&pageSize=9";
+      "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&pageSize=20";
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({
@@ -25,7 +25,7 @@ export default class News extends Component {
     console.log("Prev button");
     let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&page=${
       this.state.page + 1
-    }&pageSize=9`;
+    }&pageSize=20`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
@@ -36,13 +36,13 @@ export default class News extends Component {
   };
 
   handleNextClick = async () => {
-    if (this.state.page + 1 > Math.ceil(this.state.totalResults / 9)) {
+    if (this.state.page + 1 > Math.ceil(this.state.totalResults / 20)) {
       console.log("success");
     } else {
       console.log("next button");
       let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&page=${
         this.state.page + 1
-      }&pageSize=9`;
+      }&pageSize=20`;
       let data = await fetch(url);
       let parsedData = await data.json();
       console.log(parsedData);
@@ -56,18 +56,14 @@ export default class News extends Component {
   render() {
     return (
       <div className="container my-3">
-        <h1 className="mb-3">NewsMonkey - Top Headlines</h1>
+        <h1 className="text-center mb-3">NewsMonkey - Top Headlines</h1>
         <div className="row">
           {this.state.articles.map((element) => {
             return (
               <div className="col-md-4" key={element.url}>
                 <NewsItem
                   title={element.title}
-                  imageUrl={
-                    element.urlToImage
-                      ? element.urlToImage
-                      : "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg"
-                  }
+                  imageUrl={element.urlToImage}
                   description={element.description}
                   newsUrl={element.url}
                 />
@@ -85,6 +81,9 @@ export default class News extends Component {
             &larr; Previous
           </button>
           <button
+            disabled={
+              this.state.page + 1 > Math.ceil(this.state.totalResults / 20)
+            }
             type="button"
             className="btn btn-dark"
             onClick={this.handleNextClick}
