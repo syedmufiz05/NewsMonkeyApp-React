@@ -7,7 +7,7 @@ export default class News extends Component {
   static defaultProps = {
     category: "news",
     country: "in",
-    pageSize: 9
+    pageSize: 9,
   };
   static propTypes = {
     category: PropTypes.string,
@@ -24,10 +24,11 @@ export default class News extends Component {
     };
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
+    console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
@@ -41,7 +42,7 @@ export default class News extends Component {
     }&category=${
       this.props.category
     }&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&page=${
-      this.state.page + 1
+      this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
@@ -88,6 +89,8 @@ export default class News extends Component {
                     imageUrl={element.urlToImage}
                     description={element.description}
                     newsUrl={element.url}
+                    author={element.author}
+                    date={element.publishedAt}
                   />
                 </div>
               );
