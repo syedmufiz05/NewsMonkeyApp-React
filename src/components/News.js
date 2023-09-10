@@ -24,7 +24,6 @@ export default class News extends Component {
     super(props);
     this.state = {
       articles: [],
-      totalResults: 0,
       page: 1,
     };
     document.title = `${this.capitalizeFirstLetter(
@@ -35,7 +34,6 @@ export default class News extends Component {
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=5c2e910cd3764c06bbaf4755a7c2915f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
-    console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
