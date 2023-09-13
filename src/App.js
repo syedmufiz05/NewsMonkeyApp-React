@@ -8,6 +8,7 @@ import LoadingBar from "react-top-loading-bar";
 
 export default class App extends Component {
   pageSize = 9;
+  apiKey = process.env.REACT_APP_NEWS_API;
 
   state = {
     progress: 0,
@@ -38,6 +39,7 @@ export default class App extends Component {
                   category="general"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -51,6 +53,7 @@ export default class App extends Component {
                   category="business"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -64,6 +67,7 @@ export default class App extends Component {
                   category="entertainment"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -77,6 +81,7 @@ export default class App extends Component {
                   category="health"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -90,6 +95,7 @@ export default class App extends Component {
                   category="science"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -103,6 +109,7 @@ export default class App extends Component {
                   category="sports"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
@@ -116,6 +123,7 @@ export default class App extends Component {
                   category="technology"
                   country="in"
                   pageSize={this.pageSize}
+                  apiKey={this.apiKey}
                 />
               }
             />
